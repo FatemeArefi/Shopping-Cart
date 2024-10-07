@@ -8,11 +8,7 @@ function Cart({ data }) {
 
   return (
     <div className={styles.cart}>
-      <img
-        src={image}
-        alt={title}
-        style={{ width: "150px", height: "150px" }}
-      />
+      <img src={image} alt={title} />
       <h3>{shortenText(title)}</h3>
       <p>{price}$</p>
       <div className={styles.actions}>
