@@ -1,14 +1,14 @@
 import { createContext, useEffect, useState } from "react";
+import api from "../Services/config";
 
 const ProductContext = createContext();
 
-function ProductProvider({ chidren }) {
+function ProductProvider({ children }) {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        // const response = await api.get("/product");
         setProducts(await api.get("/product"));
       } catch (error) {
         console.log(error.message);
@@ -20,7 +20,7 @@ function ProductProvider({ chidren }) {
 
   return (
     <ProductContext.Provider value={products}>
-      {chidren}
+      {children}
     </ProductContext.Provider>
   );
 }
