@@ -7,7 +7,7 @@ function Loader() {
         width="100px"
         height="100px"
         strokeWidth="3"
-        strokeColor="#f7f7"
+        strokeColor="#0e0be1f0"
       />
     </div>
   );
