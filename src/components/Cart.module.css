@@ -10,6 +10,9 @@
   color: #3447ebd4;
   cursor: pointer;
 }
+.actions a:hover {
+  color: black;
+}
 .actions div {
   display: flex;
   align-items: center;
@@ -27,9 +30,21 @@
   height: 32px;
   width: 32px;
   line-height: 32px;
-  padding: 2px;
+  padding: 20px;
   border-radius: 8px;
   cursor: pointer;
+}
+.actions button {
+  color: #3447ebd4;
+  width: 50px;
+  height: 25px;
+  border-radius: 50%;
+  font-weight: 700;
+  font-size: 23px;
+  border: none;
+}
+.actions button:hover {
+  color: black;
 }
 .cart {
   width: 270px;
