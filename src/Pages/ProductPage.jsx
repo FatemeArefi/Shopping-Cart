@@ -1,25 +1,40 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ImSearch } from "react-icons/im";
 import { FaListUl } from "react-icons/fa";
 import Cart from "../components/Cart";
 import Loader from "../components/Loader";
 import { useProducts } from "../context/ProductContext";
+import { filterProducts, searchProducts } from "../helpers/helper";
 
 import styles from "./ProductsPage.module.css";
 
 function ProductPage() {
   const products = useProducts();
 
+  const [displayed, setDisplayed] = useState([]);
   const [search, setSearch] = useState("");
+  const [query, setQuery] = useState({});
+
+  useEffect(() => {
+    setDisplayed(products);
+  }, [products]);
+
+  useEffect(() => {
+    let finalProducts = searchProducts(products, query.search);
+    finalProducts = filterProducts(finalProducts, query.category);
+
+    setDisplayed(finalProducts);
+  }, [query]);
 
   const searchHandler = () => {
-    console.log("Search");
+    setQuery((query) => ({ ...query, search }));
   };
   const categoryHandler = (event) => {
     const { tagName } = event.target;
-
     const category = event.target.innerText.toLowerCase();
+
     if (tagName !== "LI") return;
+    setQuery((query) => ({ ...query, category }));
   };
 
   return (
@@ -37,8 +52,8 @@ function ProductPage() {
       </div>
       <div className={styles.container}>
         <div className={styles.products}>
-          {!products.length && <Loader />}
-          {products.map((p) => (
+          {!displayed.length && <Loader />}
+          {displayed.map((p) => (
             <Cart key={p.id} data={p} />
           ))}
         </div>
