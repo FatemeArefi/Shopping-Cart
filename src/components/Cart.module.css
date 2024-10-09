@@ -34,14 +34,16 @@
   border-radius: 8px;
   cursor: pointer;
 }
+
 .actions button {
-  color: #3447ebd4;
+  color: #fff;
   width: 50px;
   height: 25px;
-  border-radius: 50%;
+  border-radius: 26px;
   font-weight: 700;
   font-size: 23px;
   border: none;
+  background-color: #3447ebd4;
 }
 .actions button:hover {
   color: black;
@@ -54,8 +56,8 @@
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-end;
-  background-color: #f3f3f7d4;
-  border: 2px solid gray;
+  background-color: #fff;
+  border: 2px solid #e9dfdfe8;
   border-radius: 20px;
 }
 .cart img {
@@ -66,11 +68,12 @@
   background-color: #fff;
 }
 .cart h3 {
-  color: #3447ebd4;
+  color: #171414;
 }
 .cart p {
-  color: black;
+  color: #171414;
   font-size: 0.9rem;
   font-family: 600;
   margin: 10px 0 30px;
+  font-weight: 600;
 }
