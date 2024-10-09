@@ -9,8 +9,9 @@ import styles from "./Cart.module.css";
 function Cart({ data }) {
   const { id, title, image, price } = data;
   const [state, dispatch] = useCart();
+  console.log(state);
   const clickHandler = () => {
-    dispatch({ type: "add", payload: data });
+    dispatch({ type: "REMOVE_ITEM", payload: data });
   };
 
   return (
