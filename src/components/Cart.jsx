@@ -1,17 +1,21 @@
 import { Link } from "react-router-dom";
 import { TbListDetails } from "react-icons/tb";
 import { TbShoppingBagCheck } from "react-icons/tb";
-import { shortenText } from "../helpers/helper";
+import { MdDeleteOutline } from "react-icons/md";
 
+import { productQuantity, shortenText } from "../helpers/helper";
 import { useCart } from "../context/CartContext";
+
 import styles from "./Cart.module.css";
 
 function Cart({ data }) {
   const { id, title, image, price } = data;
   const [state, dispatch] = useCart();
   console.log(state);
-  const clickHandler = () => {
-    dispatch({ type: "REMOVE_ITEM", payload: data });
+  const quantity = productQuantity(state, id);
+  console.log(quantity);
+  const clickHandler = (type) => {
+    dispatch({ type, payload: data });
   };
 
   return (
@@ -23,9 +27,27 @@ function Cart({ data }) {
         <Link to={`/products/${id}`}>
           <TbListDetails />
         </Link>
-        <button onClick={clickHandler}>
-          <TbShoppingBagCheck />
-        </button>
+        <div>
+          {quantity === 1 && (
+            <button onClick={() => clickHandler("REMOVE_ITEM")}>
+              <MdDeleteOutline />
+            </button>
+          )}
+
+          {quantity > 1 && (
+            <button onClick={() => clickHandler("DECREASE")}>-</button>
+          )}
+
+          {!!quantity && <span>{quantity}</span>}
+
+          {quantity === 0 ? (
+            <button onClick={() => clickHandler("ADD_ITEM")}>
+              <TbShoppingBagCheck />
+            </button>
+          ) : (
+            <button onClick={() => clickHandler("INCREASE")}>+</button>
+          )}
+        </div>
       </div>
     </div>
   );

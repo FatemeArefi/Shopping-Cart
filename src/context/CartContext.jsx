@@ -10,7 +10,7 @@ const initialState = {
 };
 const reducer = (state, action) => {
   switch (action.type) {
-    case 1:
+    case "ADD_ITEM":
       if (!state.selectedItems.find((i) => i.id === action.payload.id)) {
         state.selectedItems.push({ ...action.payload, quantity: 1 });
       }
@@ -19,7 +19,7 @@ const reducer = (state, action) => {
         ...sumProducts(state.selectedItems),
         checkout: false,
       };
-    case 2: {
+    case "REMOVE_ITEM": {
       const newSelectedItems = state.selectedItems.filter(
         (i) => i.id !== action.payload.id
       );
@@ -29,27 +29,27 @@ const reducer = (state, action) => {
         selectedItems: [...newSelectedItems],
       };
     }
-    case 3: {
-      const index = state.selectedItems.findIndex(
+    case "INCREASE": {
+      const increaseIndex = state.selectedItems.findIndex(
         (i) => i.id === action.payload.id
       );
-      state.selectedItems[index].quantity++;
+      state.selectedItems[increaseIndex].quantity++;
       return {
         ...state,
         ...sumProducts(state.selectedItems),
       };
     }
-    case 4: {
-      const index = state.selectedItems.findIndex(
+    case "DECREASE": {
+      const decreaseIndex = state.selectedItems.findIndex(
         (i) => i.id === action.payload.id
       );
-      state.selectedItems[index].quantity--;
+      state.selectedItems[decreaseIndex].quantity--;
       return {
         ...state,
         ...sumProducts(state.selectedItems),
       };
     }
-    case 5:
+    case "CHECKOUT":
       return {
         selectedItems: [],
         itemsCounter: 0,
