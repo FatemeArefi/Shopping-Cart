@@ -1,6 +1,12 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import { SiOpenproject } from "react-icons/si";
+import { IoMdPricetag } from "react-icons/io";
+import { FaArrowLeft } from "react-icons/fa";
+
 import { useProductDetails } from "../context/ProductContext";
 import Loader from "../components/Loader";
+
+import styles from "./DetailPage.module.css";
 
 function DetailsPage() {
   const { id } = useParams();
@@ -10,15 +16,24 @@ function DetailsPage() {
   if (!productDetails) return <Loader />;
 
   return (
-    <div>
+    <div className={styles.container}>
       <img src={productDetails.image} alt={productDetails.title} />;
-      <div>
-        <h3>{productDetails.title}</h3>
-        <p>{productDetails.description}</p>
-        <p>{productDetails.category}</p>
+      <div className={styles.information}>
+        <h3 className={styles.title}>{productDetails.title}</h3>
+        <p className={styles.description}>
+          <SiOpenproject />
+          {productDetails.description}
+        </p>
+        <p className={styles.category}>{productDetails.category}</p>
         <div>
-          <span>{productDetails.price}$</span>
-          <Link to="/products">Back to shop</Link>
+          <span className={styles.peice}>
+            <IoMdPricetag />
+            {productDetails.price}$
+          </span>
+          <Link to="/products">
+            <FaArrowLeft />
+            <span>Back to shop</span>
+          </Link>
         </div>
       </div>
     </div>
